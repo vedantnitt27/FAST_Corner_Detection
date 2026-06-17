@@ -19,134 +19,6 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-//module fast_detector(
-
-//    input clk,
-
-//    input [7:0] center,
-
-//    input [7:0] p0,
-//    input [7:0] p1,
-//    input [7:0] p2,
-//    input [7:0] p3,
-//    input [7:0] p4,
-//    input [7:0] p5,
-//    input [7:0] p6,
-//    input [7:0] p7,
-//    input [7:0] p8,
-//    input [7:0] p9,
-//    input [7:0] p10,
-//    input [7:0] p11,
-//    input [7:0] p12,
-//    input [7:0] p13,
-//    input [7:0] p14,
-//    input [7:0] p15,
-
-//    output reg corner
-
-//);
-
-//    // FAST Threshold
-//    parameter THRESHOLD = 40;
-
-//    // Circle storage
-//    reg [7:0] circle [0:15];
-
-//    // Bright/Dark flags
-//    reg bright [0:31];
-//    reg dark   [0:31];
-
-//    integer i;
-
-//    integer bright_run;
-//    integer dark_run;
-
-//    always @(posedge clk) begin
-
-//        // ------------------------------------
-//        // STORE CIRCLE PIXELS
-//        // ------------------------------------
-
-//        circle[0]  = p0;
-//        circle[1]  = p1;
-//        circle[2]  = p2;
-//        circle[3]  = p3;
-//        circle[4]  = p4;
-//        circle[5]  = p5;
-//        circle[6]  = p6;
-//        circle[7]  = p7;
-//        circle[8]  = p8;
-//        circle[9]  = p9;
-//        circle[10] = p10;
-//        circle[11] = p11;
-//        circle[12] = p12;
-//        circle[13] = p13;
-//        circle[14] = p14;
-//        circle[15] = p15;
-
-//        // ------------------------------------
-//        // CREATE BRIGHT/DARK FLAGS
-//        // Duplicate circle for wraparound
-//        // ------------------------------------
-
-//        for(i=0; i<16; i=i+1) begin
-
-//            bright[i] = 0;
-//            bright[i+16] = 0;
-
-//            dark[i] = 0;
-//            dark[i+16] = 0;
-
-//            if(circle[i] > center + THRESHOLD) begin
-
-//                bright[i] = 1;
-//                bright[i+16] = 1;
-
-//            end
-
-//            else if(circle[i] < center - THRESHOLD) begin
-
-//                dark[i] = 1;
-//                dark[i+16] = 1;
-
-//            end
-
-//        end
-
-//        // ------------------------------------
-//        // CONTIGUOUS FAST CHECK
-//        // ------------------------------------
-
-//        bright_run = 0;
-//        dark_run = 0;
-
-//        corner <= 0;
-
-//        for(i=0; i<32; i=i+1) begin
-
-//            // Bright contiguous arc
-
-//            if(bright[i])
-//                bright_run = bright_run + 1;
-//            else
-//                bright_run = 0;
-
-//            // Dark contiguous arc
-
-//            if(dark[i])
-//                dark_run = dark_run + 1;
-//            else
-//                dark_run = 0;
-
-//            // FAST-9 decision
-
-//            if(bright_run >= 9 || dark_run >= 9)
-//                corner <= 1;
-
-//        end
-//    end
-//endmodule
-
 module fast_detector(
     input clk,
     input [7:0] center,
@@ -234,7 +106,7 @@ module fast_detector(
                 else            bright_run = 0;
                 if(dark2[i])   dark_run   = dark_run + 1;
                 else            dark_run   = 0;
-                if(bright_run >= 9 || dark_run >= 9)
+                if(bright_run >= 9 || dark_run >= 9)        // We changed to 8 from 9 for chessboard
                     corner_comb = 1;
             end
         end

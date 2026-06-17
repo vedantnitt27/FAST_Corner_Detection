@@ -19,34 +19,24 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-//module coordinate_generator(
-//    input clk,    
-//    output reg [5:0]x=0,
-//    output reg [5:0]y=0
-//);
-//    always @(posedge clk) begin   
-//        if(x==63)begin
-//            x<=0;
-//            if(y==63)
-//                y<=0;
-//            else 
-//                y<=y+1;
-//        end
-        
-//        else begin
-//            x<=x+1;
-//        end       
-//    end
-//endmodule
 module coordinate_generator(
     input clk,
-    output reg [5:0] x = 0,
-    output reg [5:0] y = 0
-);
-    always @(posedge clk) begin
-        if(x == 63) begin
+//    64*64
+//    output reg [5:0] x = 0,
+//    output reg [5:0] y = 0
+
+//    128*128
+//    output reg [6:0] x = 0,
+//    output reg [6:0] y = 0
+
+//    256*256
+    output reg [7:0] x = 0,
+    output reg [7:0] y = 0
+); 
+    always @(posedge clk) begin 
+        if(x == 255) begin   //x==63 for 64*64 and x==127 for 128*128 and x==255 for 256*256
             x <= 0;
-            if(y == 63) y <= 0;
+            if(y == 255) y <= 0;  //y==63 for 64*64 and y==127 for 128*128 and y==255 for 256*256
             else        y <= y + 1;
         end
         else begin

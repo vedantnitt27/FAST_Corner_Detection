@@ -4,7 +4,7 @@ from PIL import Image
 # INPUT IMAGE
 # ------------------------------------
 
-input_image = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\chessboard64.png"
+input_image = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\circle64.png"
 
 # ------------------------------------
 # OPEN IMAGE
@@ -31,7 +31,7 @@ print("New Image Size:", img.size)
 # ------------------------------------
 
 img.save(
-    r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\resized_chessboard64.png"
+    r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\resized_circle64.png"
 )
 
 # ------------------------------------
@@ -45,7 +45,7 @@ pixels = list(img.getdata())
 # ------------------------------------
 
 with open(
-    r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\chessboard64.hex",
+    r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\circle64.hex",
     "w"
 ) as f:
 

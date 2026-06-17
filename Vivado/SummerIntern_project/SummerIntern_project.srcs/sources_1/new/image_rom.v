@@ -19,41 +19,25 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
-//module image_rom(
-
-//    input clk,
-//    input [11:0] address,
-//    output reg [7:0] pixel
-
-//);
-//    //Memory of 1 byte to 64*64=4096 PIXELS
-//    reg [7:0] memory [0:4095];
-
-
-//    // Load HEX file into memory
-//    initial begin
-//        $readmemh("square64.hex", memory);
-//    end
-
-//    // Output pixel on clock edge
-//    always @(posedge clk) begin
-//        pixel <= memory[address];
-//    end
-
-//endmodule
-
 module image_rom(
     input clk,
     input en,
-    input [11:0] address,
+    //input [11:0] address, 64*64
+    //input [13:0] address, 128*128
+    input [15:0] address, //256*256
     output reg [7:0] pixel
 );
-
-    reg [7:0] memory [0:4095];
+    //64*64 image
+    //reg [7:0] memory [0:4095];
+    
+    //128*128 image
+    //reg [7:0] memory [0:16383];
+    
+    //256*256 image
+    reg [7:0] memory [0:65535];
 
     initial begin
-        $readmemh("D:/Vedant/NIT/Electronics/Summer_Intern_CSoC/Vivado/SummerIntern_project/SummerIntern_project.srcs/sources_1/new/rhombus64.hex", memory);
+        $readmemh("D:/Vedant/NIT/Electronics/Summer_Intern_CSoC/Vivado/SummerIntern_project/SummerIntern_project.srcs/sources_1/new/six_colored_shapes256.hex", memory);
     end
 
     always @(posedge clk) begin
