@@ -19,6 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+//GLOBAL ADAPTIVE THRESHOLD VALUE ALGORITHM
 module fast_detector(
     input clk,
     input [7:0] center,
@@ -26,9 +27,10 @@ module fast_detector(
     input [7:0] p4,  input [7:0] p5,  input [7:0] p6,  input [7:0] p7,
     input [7:0] p8,  input [7:0] p9,  input [7:0] p10, input [7:0] p11,
     input [7:0] p12, input [7:0] p13, input [7:0] p14, input [7:0] p15,
+    input [7:0] threshold, //FOR GLOBAL thershold value generator
     output reg corner
 );
-    parameter THRESHOLD = 40;
+//    parameter threshold = 40; // Defined threshold value
 
     // Stage 1 registers - threshold comparison
     reg bright [0:15];
@@ -50,9 +52,9 @@ module fast_detector(
     // Registered - breaks timing path in half
     // ─────────────────────────────────────────
     always @(posedge clk) begin
-        upper_thresh = {1'b0, center} + THRESHOLD;
-        lower_thresh = ({1'b0, center} > THRESHOLD) ?
-                       ({1'b0, center} - THRESHOLD) : 9'd0;
+        upper_thresh = {1'b0, center} + threshold;
+        lower_thresh = ({1'b0, center} > threshold) ?
+                       ({1'b0, center} - threshold) : 9'd0;
         center_r <= center;
 
         for(i = 0; i < 16; i = i+1) begin

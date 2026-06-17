@@ -4,9 +4,9 @@ import numpy as np
 # ------------------------------------
 # CONFIGURATION
 # ------------------------------------
-INPUT_PATH  = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\Test_images\test_image5.png"
-OUTPUT_PNG  = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\Test_images\test_image5_256.png"
-OUTPUT_HEX  = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\Test_images\test_image5_256.hex"
+INPUT_PATH  = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\Test_images\test_image19.png"
+OUTPUT_PNG  = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\Test_images\test_image19_256.png"
+OUTPUT_HEX  = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\Test_images\test_image19_256.hex"
 
 # ------------------------------------
 # STEP 1: LOAD IMAGE

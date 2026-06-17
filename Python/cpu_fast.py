@@ -5,7 +5,7 @@ import time
 # ─────────────────────────────────────
 # CONFIGURATION
 # ─────────────────────────────────────
-IMAGE_PATH   = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\square64.png"
+IMAGE_PATH   = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\64\square64.png"
 THRESHOLD    = 40
 NMS_RADIUS   = 4
 BORDER       = 4

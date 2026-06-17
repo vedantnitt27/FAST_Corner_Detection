@@ -19,7 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-//FOR 256*256
+//FOR 256*256 IMAGE SIZE
 module Top_module(
     input  clk,
     output tx,
@@ -48,6 +48,11 @@ module Top_module(
     // ═══════════════════════════════════════════════
     reg        start     = 1'b0;
     reg [7:0]  uart_data = 8'd0;
+    
+    // GLOBAL Adaptive threshold wires ──────────
+    wire [7:0]  mean_brightness;       // output of mean_calculator
+    wire [7:0]  adaptive_threshold;    // output of threshold_generator
+    // ───────────────────────────────────────────
 
     // ═══════════════════════════════════════════════
     // PIPELINE COORDINATE DELAY
@@ -250,24 +255,65 @@ module Top_module(
         .p8(p8),   .p9(p9),   .p10(p10), .p11(p11),
         .p12(p12), .p13(p13), .p14(p14), .p15(p15)
     );
+    
+    //--------------------------------------FOR GLOBAL THRESHOLD VALUE GENERATOR---------------------------
+    // ═══════════════════════════════════════════════
+    // STAGE 5: MEAN CALCULATOR
+    // Takes raw pixel stream from image_rom
+    // Computes mean brightness per frame
+    // Updates once at end of every frame
+    // ═══════════════════════════════════════════════
+    mean_calculator stage5 (
+        .clk             (clk),
+        .pixel           (pixel),      // raw pixel from ROM
+        .x               (x),          // current x coordinate
+        .y               (y),          // current y coordinate
+        .mean_brightness (mean_brightness)
+    );
 
     // ═══════════════════════════════════════════════
-    // STAGE 5: FAST DETECTOR
+    // STAGE 6: THRESHOLD GENERATOR
+    // Converts mean brightness to adaptive threshold
+    // threshold = mean × 25% clamped to 15-80
     // ═══════════════════════════════════════════════
-    fast_detector stage5 (
+    threshold_generator stage6 (
+        .clk             (clk),
+        .mean_brightness (mean_brightness),
+        .threshold       (adaptive_threshold)
+    );
+    //--------------------------------------FOR GLOBAL THRESHOLD VALUE GENERATOR---------------------------
+
+    // ═══════════════════════════════════════════════
+    // STAGE 7: FAST DETECTOR GLOBAL ADAPTIVE THRESHOLD
+    // ═══════════════════════════════════════════════
+    fast_detector stage7 (
         .clk    (clk),
         .center (center),
+        .threshold (adaptive_threshold),
         .p0(p0),   .p1(p1),   .p2(p2),   .p3(p3),
         .p4(p4),   .p5(p5),   .p6(p6),   .p7(p7),
         .p8(p8),   .p9(p9),   .p10(p10), .p11(p11),
         .p12(p12), .p13(p13), .p14(p14), .p15(p15),
         .corner (corner_raw)
     );
+    
+//    // ═══════════════════════════════════════════════
+//    // STAGE Alternate: FAST DETECTOR LOCAL ADAPTIVE THRESHOLD 
+//    // ═══════════════════════════════════════════════
+//    fast_detector_local alt_stage (
+//        .clk    (clk),
+//        .center (center),
+//        .p0(p0),   .p1(p1),   .p2(p2),   .p3(p3),
+//        .p4(p4),   .p5(p5),   .p6(p6),   .p7(p7),
+//        .p8(p8),   .p9(p9),   .p10(p10), .p11(p11),
+//        .p12(p12), .p13(p13), .p14(p14), .p15(p15),
+//        .corner (corner_raw)
+//    );
 
     // ═══════════════════════════════════════════════
-    // STAGE 6: UART TX
+    // STAGE 8: UART TX
     // ═══════════════════════════════════════════════
-    uart_tx stage6 (
+    uart_tx stage8 (
         .clk     (clk),
         .start   (start),
         .data_in (uart_data),
