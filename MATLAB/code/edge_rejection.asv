@@ -1,0 +1,62 @@
+% function filtered = edge_rejection(gray, corner_img)
+% 
+% [rows, cols] = size(gray);
+% 
+% filtered = zeros(rows, cols);
+% 
+% % Sobel gradients
+% Ix = [-1 0 1;
+%     -2 0 2;
+%     -1 0 1];
+% 
+% Iy = [-1 -2 -1;
+%     0  0  0;
+%     1  2  1];
+% 
+% Gx = conv2(double(gray), Ix, 'same');
+% Gy = conv2(double(gray), Iy, 'same');
+% 
+% window = 1;
+% 
+% for y = 2:rows-1
+% 
+%     for x = 2:cols-1
+% 
+%         if corner_img(y,x) > 0
+% 
+%             % Local gradients
+%             gx = Gx(y-window:y+window, ...
+%                 x-window:x+window);
+% 
+%             gy = Gy(y-window:y+window, ...
+%                 x-window:x+window);
+% 
+%             % Structure tensor terms
+%             A = sum(gx(:).^2);
+% 
+%             B = sum(gx(:).*gy(:));
+% 
+%             C = sum(gy(:).^2);
+% 
+%             % Harris determinant and trace
+%             detM = A*C - B^2;
+% 
+%             traceM = A + C;
+% 
+%             % Harris response
+%             R = detM - 0.04*(traceM^2);
+% 
+%             % Keep strong corners only
+%             if R > 1e10
+% 
+%                 filtered(y,x) = corner_img(y,x);
+% 
+%             end
+% 
+%         end
+% 
+%     end
+% 
+% end
+% 
+% end
