@@ -7,7 +7,7 @@ import numpy as np
 # ------------------------------------
 COM_PORT      = 'COM6'
 BAUD_RATE     = 115200
-IMAGE_PATH = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\256\chessboard9x9_centered_256.png"  
+IMAGE_PATH = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC\Image\Test_images\test_image14_256.png" 
 DISPLAY_SIZE  = 1024
 CORNER_RADIUS = 8
 IMAGE_SIZE    = 256          # CHANGED: 128 → 256
