@@ -37,7 +37,7 @@ module image_rom(
     reg [7:0] memory [0:65535];
 
     initial begin
-        $readmemh("D:/Vedant/NIT/Electronics/Summer_Intern_CSoC/Vivado/SummerIntern_project/SummerIntern_project.srcs/sources_1/new/test_image14_256.hex", memory);
+        $readmemh("D:/Vedant/NIT/Electronics/Summer_Intern_CSoC/Vivado/SummerIntern_project/SummerIntern_project.srcs/sources_1/new/test_image7_256.hex", memory);
     end
 
     always @(posedge clk) begin
