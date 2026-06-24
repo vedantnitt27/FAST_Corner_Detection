@@ -12,8 +12,8 @@ COM_PORT      = 'COM6'
 BAUD_RATE     = 115200
 
 BASE_DIR      = r"D:\Vedant\NIT\Electronics\Summer_Intern_CSoC"
-IMAGE_PATH    = os.path.join(BASE_DIR, "Dataset_256", "Images", "7.png")
-GT_FILE       = os.path.join(BASE_DIR, "Dataset_256", "Ground Truth", "7.txt")
+IMAGE_PATH    = os.path.join(BASE_DIR, "Dataset_256", "Images", "17.png")
+GT_FILE       = os.path.join(BASE_DIR, "Dataset_256", "Ground Truth", "17.txt")
 
 DISPLAY_SIZE  = 640      # CHANGED: was 1024, back to standard 640
 CORNER_RADIUS = 2        # CHANGED: was 3, slightly smaller to suit 640 display
