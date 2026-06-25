@@ -27,10 +27,10 @@ module fast_detector(
     input [7:0] p4,  input [7:0] p5,  input [7:0] p6,  input [7:0] p7,
     input [7:0] p8,  input [7:0] p9,  input [7:0] p10, input [7:0] p11,
     input [7:0] p12, input [7:0] p13, input [7:0] p14, input [7:0] p15,
-    input [7:0] threshold, //FOR GLOBAL thershold value generator
+//    input [7:0] threshold, //FOR GLOBAL thershold value generator
     output reg corner
 );
-//    parameter threshold = 40; // Defined threshold value
+    parameter threshold = 40; // Defined threshold value
 
     // Stage 1 registers - threshold comparison
     reg bright [0:15];
