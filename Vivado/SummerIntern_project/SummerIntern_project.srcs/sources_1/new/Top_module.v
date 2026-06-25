@@ -256,32 +256,32 @@ module Top_module(
         .p12(p12), .p13(p13), .p14(p14), .p15(p15)
     );
     
-//    //--------------------------------------FOR GLOBAL THRESHOLD VALUE GENERATOR---------------------------
-//    // ═══════════════════════════════════════════════
-//    // STAGE 5: MEAN CALCULATOR
-//    // Takes raw pixel stream from image_rom
-//    // Computes mean brightness per frame
-//    // Updates once at end of every frame
-//    // ═══════════════════════════════════════════════
-//    mean_calculator stage5 (
-//        .clk             (clk),
-//        .pixel           (pixel),      // raw pixel from ROM
-//        .x               (x),          // current x coordinate
-//        .y               (y),          // current y coordinate
-//        .mean_brightness (mean_brightness)
-//    );
+    //--------------------------------------FOR GLOBAL THRESHOLD VALUE GENERATOR---------------------------
+    // ═══════════════════════════════════════════════
+    // STAGE 5: MEAN CALCULATOR
+    // Takes raw pixel stream from image_rom
+    // Computes mean brightness per frame
+    // Updates once at end of every frame
+    // ═══════════════════════════════════════════════
+    mean_calculator stage5 (
+        .clk             (clk),
+        .pixel           (pixel),      // raw pixel from ROM
+        .x               (x),          // current x coordinate
+        .y               (y),          // current y coordinate
+        .mean_brightness (mean_brightness)
+    );
 
-//    // ═══════════════════════════════════════════════
-//    // STAGE 6: THRESHOLD GENERATOR
-//    // Converts mean brightness to adaptive threshold
-//    // threshold = mean × 25% clamped to 15-80
-//    // ═══════════════════════════════════════════════
-//    threshold_generator stage6 (
-//        .clk             (clk),
-//        .mean_brightness (mean_brightness),
-//        .threshold       (adaptive_threshold)
-//    );
-//    //--------------------------------------FOR GLOBAL THRESHOLD VALUE GENERATOR---------------------------
+    // ═══════════════════════════════════════════════
+    // STAGE 6: THRESHOLD GENERATOR
+    // Converts mean brightness to adaptive threshold
+    // threshold = mean × 25% clamped to 15-80
+    // ═══════════════════════════════════════════════
+    threshold_generator stage6 (
+        .clk             (clk),
+        .mean_brightness (mean_brightness),
+        .threshold       (adaptive_threshold)
+    );
+    //--------------------------------------FOR GLOBAL THRESHOLD VALUE GENERATOR---------------------------
 
     // ═══════════════════════════════════════════════
     // STAGE 7: FAST DETECTOR GLOBAL ADAPTIVE THRESHOLD
@@ -289,7 +289,7 @@ module Top_module(
     fast_detector stage7 (
         .clk    (clk),
         .center (center),
-//        .threshold (adaptive_threshold),
+        .threshold (adaptive_threshold),
         .p0(p0),   .p1(p1),   .p2(p2),   .p3(p3),
         .p4(p4),   .p5(p5),   .p6(p6),   .p7(p7),
         .p8(p8),   .p9(p9),   .p10(p10), .p11(p11),
